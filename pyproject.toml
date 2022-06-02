@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "planeks_fakecsv"
+version = "0.1.0"
+description = ""
+authors = ["Hukyl <a.shalaev7125@gmail.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+Django = "^4.0.5"
+celery = "^5.2.7"
+
+[tool.poetry.dev-dependencies]
+pylint = "^2.14.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
