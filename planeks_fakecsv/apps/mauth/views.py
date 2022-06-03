@@ -8,7 +8,7 @@ from django.views.decorators.http import require_http_methods
 def index(request: HttpRequest):
     if request.user.is_authenticated:
         return redirect(reverse('gen:index'))
-    return render(request, 'login.html')
+    return render(request, 'mauth/index.html')
 
 
 @require_http_methods(["POST"])
