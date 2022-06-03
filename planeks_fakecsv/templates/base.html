@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <title>FakeCSV - {% block title %}{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-5.0.2.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% block head %}{% endblock %}    
+  </head>
+
+  <body>
+    {% block body %}{% endblock %}
+    {% block js %}{% endblock %}
+  </body>
+</html>
