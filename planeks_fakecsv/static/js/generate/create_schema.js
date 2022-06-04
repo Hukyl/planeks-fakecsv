@@ -62,7 +62,7 @@ $('form#main').submit(event => {
     const orders = jQuery.map(
         $('input[data-name=order]'), 
         e => parseInt(e.value)
-    ).sort((a, b) => a - b);
+    ).sort((a, b) => a - b).slice(0, -1);
     for (let i = 0; i < orders.length; i++) {
         if (orders[i] !== i) {
             alert('Order should start from 0 and be consistent!');

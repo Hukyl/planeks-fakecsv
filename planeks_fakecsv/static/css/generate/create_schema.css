@@ -11,7 +11,13 @@ div.header {
 
 div.scheme-column {
   width: 80%;
-  padding: 1.5rem 1rem;
+  padding: 0.25rem 1rem;
+}
+
+div#add-column-fields {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 div.scheme-column a[data-usage="delete-column"] {
