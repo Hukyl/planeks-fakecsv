@@ -13,7 +13,7 @@
   <div id="main">
     <div class="header d-flex justify-content-between">
       <span class="page-name h4">Data schemas</span>
-      <a class="btn btn-success" href="{# create adding new schema url #}">New schema</a>
+      <a class="btn btn-success" href="{% url 'gen:create' %}">New schema</a>
     </div>
     {% if schemas %}
       <table class="table table-bordered">

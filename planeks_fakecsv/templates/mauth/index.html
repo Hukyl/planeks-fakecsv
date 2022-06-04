@@ -9,8 +9,9 @@
 
 
 {% block body %}
-<form id="main" class="d-flex align-items-center" method="POST" action="{% url 'mauth:login' %}">
+<form id="main" class="d-flex align-items-center" method="POST" action="{% url 'mauth:login' %}" autocomplete="off">
   {% csrf_token %}
+  <input type="hidden" autocomplete="false">
   <div class="d-flex" id="login-label">Login</div>
   <input class="d-block form-control" name="username" placeholder="Username" data-type="field">
   <input class="d-block form-control" name="password" placeholder="Password" data-type="field" type="password">

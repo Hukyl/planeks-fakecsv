@@ -1,0 +1,84 @@
+{% extends 'generate/base.html' %}
+{% load static %}
+
+{% block title %}Create Schema{% endblock %}
+
+{% block head %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{% static 'css/generate/create_schema.css' %}">
+{% endblock %}
+
+
+{% block body %}
+  {{ block.super }}
+  <form id="main" action="{{ request.path }}" method="POST">
+    {% csrf_token %}
+    <div class="header d-flex justify-content-between">
+      <span class="page-name h4">New schema</span>
+      <input class="btn btn-primary" type="submit" value="Submit">
+    </div>
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input class="form-control" type="text" name="name">
+    </div>
+    <div class="mb-3">
+      <label for="column_delimiter" class="form-label">Column separator</label>
+      <select class="form-select" name="column_delimiter">
+        {% for value, text in column_delimiters %}
+          <option value="{{ value }}" {% if forloop.counter0 == 0 %}selected{% endif %}>
+            {{ text }}
+          </option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="string_character" class="form-label">String character</label>
+      <select class="form-select" name="string_character">
+        {% for value, text in string_characters %}
+          <option value="{{ value }}" {% if forloop.counter0 == 0 %}selected{% endif %}>
+            {{ text }}
+          </option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="header d-flex">
+      <span class="page-name h4">Schema columns</span>
+    </div>
+    <div id="add-column-fields" class="scheme-column border rounded">
+      <div class="d-flex flex-row">
+        <div class="mb-3 me-3 flex-grow-1">
+          <label for="" data-name="name" class="form-label">Column name</label>
+          <input type="text" data-name="name" class="form-control">
+        </div>
+        <div class="mb-3 me-3">
+          <label for="" data-name="type" class="form-label">Type</label>
+          <select class="form-select" data-name="type">
+            <option selected disabled value="-">-----</option>
+            {% for text in column_types %}
+              <option value="{{ text }}">{{ text }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="mb-3 me-3 align-items-center">
+          <label for="" data-name="order" class="form-label">Order</label>
+          <div class="d-flex flex-row">
+            <input class="form-control me-3" type="number" min="0" data-name="order">
+            <button 
+              type="button" 
+              class="link-danger bg-transparent border-0" 
+              data-usage="delete-column"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="btn btn-primary" id="add-column">Add column</button>
+    </div>
+  </form>
+{% endblock %}
+
+{% block js %}
+  <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+  <script src="{% static 'js/generate/create_schema.js' %}"></script>
+{% endblock %}
