@@ -49,7 +49,7 @@ $('button#add-column').click(function(event) {
 
 
 $('form#main').submit(event => {
-    if ($('div.scheme-column').length - 1) {
+    if ($('div.scheme-column').length - 1 === 0) {
         alert('At least one column should be present!');
         event.preventDefault(); event.stopPropagation();
     }
@@ -61,7 +61,7 @@ $('form#main').submit(event => {
     }
     const orders = jQuery.map(
         $('input[data-name=order]'), 
-        e => parseInt(e.val())
+        e => parseInt(e.value)
     ).sort((a, b) => a - b);
     for (let i = 0; i < orders.length; i++) {
         if (orders[i] !== i) {
