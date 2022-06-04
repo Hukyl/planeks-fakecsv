@@ -29,7 +29,7 @@ class DataSchema(models.Model):
         blank=False, default=StringCharacter.DOUBLE_QUOTE
     )
     last_modified_at = models.DateField(auto_now=True)
-    schema_columns = models.JSONField(null=False, blank=False)
+    columns = models.JSONField(null=False, blank=False)
     user = models.ForeignKey(
         get_user_model(), on_delete=models.CASCADE,
         related_name='schemas', null=False
