@@ -49,6 +49,10 @@ $('button#add-column').click(function(event) {
 
 
 $('form#main').submit(event => {
+    if ($('div.scheme-column').length - 1) {
+        alert('At least one column should be present!');
+        event.preventDefault(); event.stopPropagation();
+    }
     for (let column_name_input of $('input[data-name=name]').slice(0, -1)) {
         if (column_name_input.value === '') {
             alert('All column names should be not null!');
