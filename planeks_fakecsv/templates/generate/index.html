@@ -1,0 +1,44 @@
+{% extends 'generate/base.html' %}
+{% load static %}
+
+{% block head %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{% static 'css/generate/index.css' %}">
+{% endblock %}
+
+{% block body %}
+  {{ block.super }}
+  <div id="main">
+    <div class="header d-flex justify-content-between">
+      <span class="page-name h4">Data schemas</span>
+      <a class="btn btn-success" href="{# create adding new schema url #}">New schema</a>
+    </div>
+    {% if schemas %}
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Modified</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for schema in schemas %}
+            <tr>
+              <th scope="row">{{ forloop.counter }}</th>
+              <td><a class="link-primary" href="{# add url for creating datasets #}">{{ schema.name }}</a></td>
+              <td>{{ schema.last_modified_at|date:"Y-m-d" }}</td>
+              <td>
+                <a href="{# add url for editing schema #}" class="link-primary edit-scheme">Edit scheme</a>
+                <a href="{# add url for deleting schema #}" class="link-danger delete-scheme">Delete</a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <h2>No schemas created yet. Create one!</h2>
+    {% endif %}
+  </div>
+{% endblock %}

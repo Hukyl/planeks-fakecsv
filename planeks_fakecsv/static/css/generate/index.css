@@ -1,0 +1,17 @@
+div#main {
+  margin-right: 8rem;
+  margin-left: 8rem;
+  width: 75%;
+}
+
+div.header {
+  margin-bottom: 2rem;
+}
+
+th, td {
+  padding: 0.75rem 0 0.75rem 1rem!important;
+}
+
+table.table > tbody a.edit-scheme  {
+  margin-right: 1rem;
+}

@@ -1,0 +1,27 @@
+nav#top {
+  background-color: #F7F7F9;
+  padding: 0.9375rem 8rem;
+  margin-bottom: 1.75rem;
+}
+
+nav#top span#navbar-user-greeting {
+  margin-right: 1rem;
+}
+
+nav#top div.container-fluid {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+nav#top div.d-flex:nth-child(2) * {
+  color: #0000004D!important;
+}
+
+nav#top a.navbar-brand {
+  margin-right: 3rem;
+}
+
+a:link { text-decoration: none!important; }
+a:visited { text-decoration: none!important; }
+a:hover { text-decoration: none!important; }
+a:active { text-decoration: none!important; }

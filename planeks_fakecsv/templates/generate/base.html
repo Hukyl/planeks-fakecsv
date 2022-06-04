@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/generate/base.css' %}">
+{% endblock %}
+
+
+{% block body %}
+  <nav class="navbar navbar-expand-lg" id="top">
+    <div class="container-fluid">
+      <a href="{% url 'gen:index' %}" class="navbar-brand link-dark mb-0 fw-bold">FakeCSV</a>
+      <span class="navbar-text">Schemas</span>
+      <div class="d-flex">
+        <span class="navbar-text text-secondary" id="navbar-user-greeting">Hello, <b>{{ user.get_username }}</b></span>
+        <a href="{% url 'mauth:logout' %}" class="navbar-text link-secondary">Logout</a>
+      </div>
+    </div>
+  </nav>
+{% endblock %}
