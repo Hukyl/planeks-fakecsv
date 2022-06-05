@@ -27,7 +27,7 @@
   <div id="main">
     <div class="header d-flex justify-content-between">
       <span class="page-name h4">Data sets</span>
-      <form action="{# add url to create data set #}" method="POST" class="d-flex flex-row flex-grow-0">
+      <form action="{% url 'gen:create-dataset' schema.id %}" method="POST" class="d-flex flex-row flex-grow-0">
         {% csrf_token %}
         <label for="rows-count" class="col-sm-1 col-form-label">Rows:</label>
         <input type="number" min="1" class="form-control form-control-sm" id="rows-count" name="rows-count">
@@ -51,7 +51,9 @@
               <td>{{ dataset.created_at|date:"Y-m-d" }}</td>
               <td>{% if dataset.csv_file %}Ready{% else %}Processing{% endif %}</td>
               <td>
-                <a href="{{ dataset.csv_file.url }}" class="link-primary">Download</a>
+                {% if dataset.csv_file %}
+                  <a href="{{ dataset.csv_file.url }}" class="link-primary">Download</a>
+                {% endif %}
               </td>
             </tr>
           {% endfor %}

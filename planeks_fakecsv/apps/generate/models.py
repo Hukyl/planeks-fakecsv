@@ -1,12 +1,22 @@
-from __future__ import annotations
-from io import StringIO
-from datetime import datetime
-from typing import Generator, NoReturn
-import tempfile
+"""
+This module provides with models and classes for `generate` app.
 
-from django.db import models
+Classes:
+    - CSVValueGenerator: generator of fake csv values based on data schema
+    - DataSchema: schema to store JSON column schema
+    - DataSet: data set to store created CSV file based
+        on corresponding data schema
+"""
+
+from __future__ import annotations
+
+from datetime import datetime
+from io import StringIO
+from typing import Generator
+
 from django.contrib.auth import get_user_model
 from django.core.files.base import ContentFile
+from django.db import models
 from faker import Faker
 
 
@@ -29,7 +39,7 @@ class CSVValueGenerator:
 
         Returns:
             list[tuple[str, str]]: (value, representation)
-        """        
+        """
         return [
             (dtype, dtype.replace('_', ' ').title())
             for dtype in cls.DATA_TYPES
@@ -66,7 +76,7 @@ class CSVValueGenerator:
 
         Returns:
             str
-        """        
+        """
         return self.faker.domain_name()
 
     def phone_number(self) -> str:
@@ -199,8 +209,7 @@ class DataSet(models.Model):
             for line in generator.generate(num_rows=num_rows):
                 buffer.write(line)
             self.csv_file.save(
-                f"{self.id}__{datetime.now():%Y-%m-%d-%H-%M-%S}.csv",
+                f"{self.schema.id}__{datetime.now():%Y-%m-%d-%H-%M-%S}.csv",
                 ContentFile(buffer.getvalue())
             )
-        self.save()
         return True
