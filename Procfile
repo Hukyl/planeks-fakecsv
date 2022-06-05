@@ -1,2 +1,2 @@
 web: gunicorn planeks_fakecsv.wsgi
-worker: celery worker --app=planeks_fakecsv.celery.app
+worker: celery -A planeks_fakecsv worker
