@@ -11,7 +11,7 @@ Classes:
 from __future__ import annotations
 
 from datetime import datetime
-from io import StringIO
+from io import BytesIO
 from typing import Generator
 
 from django.contrib.auth import get_user_model
@@ -205,11 +205,14 @@ class DataSet(models.Model):
         """
         # pylint: disable=no-member
         generator = CSVValueGenerator(self.schema)
-        with StringIO() as buffer:
+        with BytesIO() as buffer:
             for line in generator.generate(num_rows=num_rows):
-                buffer.write(line)
+                buffer.write(line.encode('utf-8'))
             self.csv_file.save(
-                f"{self.schema.id}__{datetime.now():%Y-%m-%d-%H-%M-%S}.csv",
-                ContentFile(buffer.getvalue())
+                (
+                    f"{self.schema.id}__{datetime.now():%Y-%m-%d-%H-%M-%S}"
+                    ".csv"
+                ),
+                ContentFile(buffer.getbuffer())
             )
         return True
