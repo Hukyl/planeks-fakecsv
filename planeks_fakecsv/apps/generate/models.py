@@ -212,7 +212,7 @@ class DataSet(models.Model):
                 (
                     f"{self.schema.id}__{datetime.now():%Y-%m-%d-%H-%M-%S}"
                     ".csv"
-                ).encode('utf-8'),
+                ),
                 ContentFile(buffer.getbuffer())
             )
         return True
