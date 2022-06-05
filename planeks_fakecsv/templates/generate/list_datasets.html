@@ -18,6 +18,20 @@
     label[for=rows-count] {
       margin-left: auto;
     }
+
+    .cube {
+      color: white;
+      padding: 0.375rem 0.3125rem;
+      font-size: 0.75rem;
+      border-radius: 4px;
+    }
+
+    .green-cube {
+      background-color: #5CB85C!important; 
+    }
+    .gray-cube {
+      background-color: #999!important;
+    }
   </style>
 {% endblock %}
 
@@ -49,7 +63,11 @@
             <tr>
               <th scope="row">{{ forloop.counter }}</th>
               <td>{{ dataset.created_at|date:"Y-m-d" }}</td>
-              <td>{% if dataset.csv_file %}Ready{% else %}Processing{% endif %}</td>
+              <td>
+                <span class="cube {% if dataset.csv_file %}green-cube{% else %}gray-cube{% endif %}">                
+                  {% if dataset.csv_file %}Ready{% else %}Processing{% endif %}
+                </span>
+              </td>
               <td>
                 {% if dataset.csv_file %}
                   <a href="{{ dataset.csv_file.url }}" class="link-primary">Download</a>
