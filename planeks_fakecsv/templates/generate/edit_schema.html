@@ -66,8 +66,8 @@
             <label for="{{ order|add:'__type' }}" data-name="type" class="form-label">Type</label>
             <select class="form-select" data-name="type" name="{{ order|add:'__type' }}">
               <option disabled value="-">-----</option>
-              {% for text in column_types %}
-                <option value="{{ text }}" {% if column.type == text %}selected{% endif %}>{{ text }}</option>
+              {% for value, text in column_types %}
+                <option value="{{ value }}" {% if column.type == value %}selected{% endif %}>{{ text }}</option>
               {% endfor %}
             </select>
           </div>
