@@ -160,4 +160,4 @@ DATABASES['default'].update(prod_db)
 
 
 import django_heroku
-django_heroku.settigns(locals(), staticfiles=False)
+django_heroku.settings(locals(), staticfiles=False)
