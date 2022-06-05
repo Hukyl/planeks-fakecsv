@@ -134,7 +134,12 @@ STATICFILES_DIRS = [
     PROJECT_DIR / 'static'
 ]
 
+STATIC_ROOT = PROJECT_DIR / 'static'
+
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
+# Media files
 
 MEDIA_URL = 'media/'
 
