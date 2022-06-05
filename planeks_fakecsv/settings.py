@@ -142,9 +142,7 @@ AWS_S3_SIGNATURE_VERSION = 's3v4'
 
 STATIC_URL = 'static/'
 
-STATICFILES_DIRS = [
-    PROJECT_DIR / 'static'
-]
+STATICFILES_DIRS = []
 
 STATIC_ROOT = PROJECT_DIR / 'static'
 
