@@ -77,6 +77,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'planeks_fakecsv.wsgi.application'
 
+LOGIN_URL = '/auth/'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
