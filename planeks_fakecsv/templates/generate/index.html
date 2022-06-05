@@ -29,7 +29,7 @@
           {% for schema in schemas %}
             <tr>
               <th scope="row">{{ forloop.counter }}</th>
-              <td><a class="link-primary" href="{# add url for creating datasets #}">{{ schema.name }}</a></td>
+              <td><a class="link-primary" href="{% url 'gen:datasets' schema.id %}">{{ schema.name }}</a></td>
               <td>{{ schema.last_modified_at|date:"Y-m-d" }}</td>
               <td>
                 <a href="{% url 'gen:edit' schema.id %}" class="link-primary edit-scheme">Edit scheme</a>

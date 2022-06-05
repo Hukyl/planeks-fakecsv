@@ -83,3 +83,27 @@ def delete_schema(request: HttpRequest, schema_id: int) -> HttpResponse:
         raise PermissionDenied
     schema.delete()
     return redirect(reverse('gen:index'))
+
+
+@require_http_methods(["GET"])
+@login_required
+def list_datasets(request: HttpRequest, schema_id: int) -> HttpResponse:
+    schema = get_object_or_404(DataSchema, id=schema_id)
+    if schema.user != request.user:
+        raise PermissionDenied
+    return render(request, 'generate/list_datasets.html', context={
+        'datasets': schema.datasets.all()
+    })
+
+
+@require_http_methods(["POST"])
+@login_required
+def create_dataset(request: HttpRequest, schema_id: int) -> HttpResponse:
+    schema = get_object_or_404(DataSchema, id=schema_id)
+    if schema.user != request.user:
+        raise PermissionDenied
+    q = request.POST
+    dset = DataSet(schema=schema)
+    dset.save()
+    dset.update_csv(num_rows=int(q.get('rows-count')))
+    return redirect(request, reverse('gen:datasets', args=[schema_id]))

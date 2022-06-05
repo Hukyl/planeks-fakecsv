@@ -1,7 +1,7 @@
 from __future__ import annotations
 from io import StringIO
 from datetime import datetime
-from typing import Generator
+from typing import Generator, NoReturn
 import tempfile
 
 from django.db import models
@@ -170,29 +170,6 @@ class DataSchema(models.Model):
         related_name='schemas', null=False
     )
 
-    def create_dataset(self, *, num_rows: int) -> DataSet:
-        """
-        Create data set according to the columns.
-
-        Args:
-            num_rows (int): number of rows of fake data
-
-        Returns:
-            DataSet
-        """
-        # pylint: disable=no-member
-        dset = DataSet(schema=self)
-        generator = CSVValueGenerator(self)
-        with StringIO() as buffer:
-            for line in generator.generate(num_rows=num_rows):
-                buffer.write(line)
-            dset.csv_file.save(
-                f"{self.id}__{datetime.now():%Y-%m-%d-%H-%M-%S}.csv",
-                ContentFile(buffer.getvalue())
-            )
-        dset.save()
-        return dset
-
 
 class DataSet(models.Model):
     """
@@ -205,3 +182,25 @@ class DataSet(models.Model):
     )
     csv_file = models.FileField()
     created_at = models.DateField(auto_now_add=True)
+
+    def update_csv(self, *, num_rows: int) -> True:
+        """
+        Update data set according to the columns.
+
+        Args:
+            num_rows (int): number of rows of fake data
+
+        Returns:
+            DataSet
+        """
+        # pylint: disable=no-member
+        generator = CSVValueGenerator(self.schema)
+        with StringIO() as buffer:
+            for line in generator.generate(num_rows=num_rows):
+                buffer.write(line)
+            self.csv_file.save(
+                f"{self.id}__{datetime.now():%Y-%m-%d-%H-%M-%S}.csv",
+                ContentFile(buffer.getvalue())
+            )
+        self.save()
+        return True
