@@ -152,7 +152,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # Celery stuff
-CELERY_RESULT_BACKEND = 'django-db'
+BROKER_URL = os.environ.get('REDIS_URL')
+CELERY_RESULT_BACKEND = os.environ.get('REDIS_URL')
 CELERY_CACHE_BACKEND = 'django-cache'
 
 
