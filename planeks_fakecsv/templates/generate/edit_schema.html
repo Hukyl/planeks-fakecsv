@@ -107,8 +107,8 @@
           <label for="" data-name="type" class="form-label">Type</label>
           <select class="form-select" data-name="type">
             <option selected disabled value="-">-----</option>
-            {% for text in column_types %}
-              <option value="{{ text }}">{{ text }}</option>
+            {% for value, text in column_types %}
+              <option value="{{ value }}">{{ text }}</option>
             {% endfor %}
           </select>
         </div>

@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
             name='DataSet',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('csv_file', models.FileField(upload_to=generate.models.user_directory_path)),
+                ('csv_file', models.FileField(upload_to='')),
                 ('created_at', models.DateField(auto_now_add=True)),
                 ('schema', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='datasets', to='generate.dataschema')),
             ],

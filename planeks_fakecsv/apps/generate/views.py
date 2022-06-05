@@ -6,20 +6,8 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.views.decorators.http import require_http_methods
-from faker import Faker
 
-from .models import DataSchema, DataSet
-
-faker = Faker()
-CSV_DATA_TYPES = {
-    'Full name': faker.name,
-    'Job': faker.job,
-    'Domain name': faker.domain_name,
-    'Phone number': faker.msisdn,  # in GSM
-    'Company name': faker.company,
-    'Address': lambda: faker.address().replace('\n', '; '),
-    'Date': faker.date
-}
+from .models import DataSchema, DataSet, CSVValueGenerator
 
 
 @login_required
@@ -37,7 +25,7 @@ def create_schema(request: HttpRequest) -> HttpResponse:
         return render(request, 'generate/create_schema.html', context={
             'column_delimiters': DataSchema.ColumnDelimiter.choices,
             'string_characters': reversed(DataSchema.StringCharacter.choices),
-            'column_types': CSV_DATA_TYPES.keys()
+            'column_types': CSVValueGenerator.choices()
         })
     q = request.POST.dict()
     q.pop('csrfmiddlewaretoken')
@@ -64,7 +52,7 @@ def edit_schema(request: HttpRequest, schema_id: int) -> HttpResponse:
     if request.method == "GET":
         return render(request, 'generate/edit_schema.html', context={
             'schema': get_object_or_404(DataSchema, id=schema_id),
-            'column_types': CSV_DATA_TYPES.keys()
+            'column_types': CSVValueGenerator.choices()
         })
     q = request.POST.dict()
     q.pop('csrfmiddlewaretoken')
